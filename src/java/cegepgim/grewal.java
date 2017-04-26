@@ -77,37 +77,21 @@ public class grewal {
                 Long timenow = curenttime();
                 obj.accumulate("Timestmap", timenow);
                 
-                rs.beforeFirst();
-                JSONArray ary = new JSONArray();
-                
-                while (rs.next()) {
+              
                     
-                    String FIRSTNAME = rs.getString("FIRSTNAME");
-                   String LASTNAME = rs.getString("LASTNAME");
-                   String USER_ID = rs.getString("USER_ID");
-                   String EMAIL = rs.getString("EMAIL");
-                    String PHONENUMBER = rs.getString("PHONENUMBER");
-                  Date DOB=rs.getDate("DOB");
-                String PASSWORD = rs.getString("PASSWORD");
+                  
                 
-                 String newDate = dateFormatter(DOB);
-                    JSONObject newobj = new JSONObject();
+                 
 
-                    newobj.accumulate("UserId", USER_ID);
-                    newobj.accumulate("FirstName", FIRSTNAME);
+                    obj.accumulate("UserId", id);
+                    obj.accumulate("FirstName", name);
 
-                    newobj.accumulate("LastName", LASTNAME);
-                    newobj.accumulate("Email", EMAIL);
-                    newobj.accumulate("PhoneNumber", PHONENUMBER);
-                    newobj.accumulate("Dob", newDate);
-                    newobj.accumulate("Password", PASSWORD);
-                   
-
-                    ary.add(newobj);
-                    newobj.clear();
-                }
-                obj.accumulate("Users", ary);
-
+                    obj.accumulate("LastName", lastn);
+                    obj.accumulate("Email", useremail);
+                    obj.accumulate("PhoneNumber", number);
+                    obj.accumulate("Dob", birthdate);
+                    obj.accumulate("Password", pass);
+                 
             } else {
                 status = "wrong";
 
@@ -123,6 +107,154 @@ public class grewal {
             obj.accumulate("Status", "ERROR");
             obj.accumulate("TimeStamp", curenttime());
              obj.accumulate("UserId", id);
+            obj.accumulate("Message", e.getLocalizedMessage());
+   
+        }
+        System.out.println("Goodbye!");
+ 
+        return obj.toString();
+    }
+     @Path("login&{Uid}&{Upass}")
+    @GET
+    @Produces("application/json")
+    public String login (@PathParam("Uid") String id,@PathParam("Upass") String pass) throws SQLException, IOException {
+        try {
+            create_connection.getConnection();
+           
+            String sql = "select * from USERINFO where user_id='"+id+"' and password='"+pass+"'";
+            ResultSet rs = create_connection.grewal(sql);
+            if (rs.next()) {
+                status = "ok";
+                obj.accumulate("Status", status);
+                Long timenow = curenttime();
+                obj.accumulate("Timestmap", timenow);
+                
+                    String FIRSTNAME = rs.getString("FIRSTNAME");
+                   String LASTNAME = rs.getString("LASTNAME");
+                   String USER_ID = rs.getString("USER_ID");
+                   String EMAIL = rs.getString("EMAIL");
+                    String PHONENUMBER = rs.getString("PHONENUMBER");
+                  Date DOB=rs.getDate("DOB");
+                
+                
+                 String newDate = dateFormatter(DOB);
+                    
+                    obj.accumulate("UserId", USER_ID);
+                    obj.accumulate("FirstName", FIRSTNAME);
+
+                    obj.accumulate("LastName", LASTNAME);
+                    obj.accumulate("Email", EMAIL);
+                    obj.accumulate("PhoneNumber", PHONENUMBER);
+                    obj.accumulate("Dob", newDate);
+                    obj.accumulate("Password", pass);
+                
+            } else {
+                status = "wrong";
+
+                obj.accumulate("Status", status);
+                Long timenow = curenttime();
+                obj.accumulate("Timestmap", timenow);
+                obj.accumulate("UserId", id);
+                obj.accumulate("Message", "no column or row found");
+             
+            }
+          
+        } catch (Exception e) {
+            obj.accumulate("Status", "ERROR");
+            obj.accumulate("TimeStamp", curenttime());
+             obj.accumulate("UserId", id);
+            obj.accumulate("Message", e.getLocalizedMessage());
+   
+        }
+        System.out.println("Goodbye!");
+ 
+        return obj.toString();
+    }
+    @Path("forgotpasswordemail&{Uid}&{Uemail}")
+    @GET
+    @Produces("application/json")
+    public String forgotpasswordemail (@PathParam("Uid") String id,@PathParam("Uemail") String useremail) throws SQLException, IOException {
+        try {
+            create_connection.getConnection();
+            
+            String sql = "select * from USERINFO where user_id='"+id+"' and email='"+useremail+"'";
+            ResultSet rs = create_connection.grewal(sql);
+            if (rs.next()) {
+                status = "ok";
+                obj.accumulate("Status", status);
+                Long timenow = curenttime();
+                obj.accumulate("Timestmap", timenow);
+                    
+                String PASSWORD = rs.getString("PASSWORD");
+                    obj.accumulate("UserId", id);
+                    
+                    obj.accumulate("Email", useremail);
+                   
+                    obj.accumulate("Password", PASSWORD);
+                 
+            } else {
+                status = "wrong";
+
+                obj.accumulate("Status", status);
+                Long timenow = curenttime();
+                obj.accumulate("Timestmap", timenow);
+                obj.accumulate("UserId", id);
+                obj.accumulate("Email", useremail);
+                obj.accumulate("Message", "no column or row found");
+             
+            }
+          
+        } catch (Exception e) {
+            obj.accumulate("Status", "ERROR");
+            obj.accumulate("TimeStamp", curenttime());
+             obj.accumulate("UserId", id);
+             obj.accumulate("Email", useremail);
+            obj.accumulate("Message", e.getLocalizedMessage());
+   
+        }
+        System.out.println("Goodbye!");
+ 
+        return obj.toString();
+    }
+     @Path("forgotpasswordephone&{Uid}&{phonenumber}")
+    @GET
+    @Produces("application/json")
+    public String forgotpasswordephone (@PathParam("Uid") String id,@PathParam("phonenumber") String number) throws SQLException, IOException {
+        try {
+            create_connection.getConnection();
+            
+            String sql = "select * from USERINFO where user_id='"+id+"' and PHONENUMBER='"+number+"'";
+            ResultSet rs = create_connection.grewal(sql);
+            if (rs.next()) {
+                status = "ok";
+                obj.accumulate("Status", status);
+                Long timenow = curenttime();
+                obj.accumulate("Timestmap", timenow);
+                    
+                String PASSWORD = rs.getString("PASSWORD");
+                    obj.accumulate("UserId", id);
+                    
+                    obj.accumulate("PhoneNumber", number);
+                   
+                    obj.accumulate("Password", PASSWORD);
+                 
+            } else {
+                status = "wrong";
+
+                obj.accumulate("Status", status);
+                Long timenow = curenttime();
+                obj.accumulate("Timestmap", timenow);
+                obj.accumulate("UserId", id);
+                obj.accumulate("PhoneNumber", number);
+                obj.accumulate("Message", "no column or row found");
+             
+            }
+          
+        } catch (Exception e) {
+            obj.accumulate("Status", "ERROR");
+            obj.accumulate("TimeStamp", curenttime());
+             obj.accumulate("UserId", id);
+             obj.accumulate("PhoneNumber", number);
             obj.accumulate("Message", e.getLocalizedMessage());
    
         }
@@ -278,6 +410,243 @@ public class grewal {
             obj.accumulate("TimeStamp", curenttime());
             obj.accumulate("TutorialId", Tut_id);
             obj.accumulate("UserID", userid);
+            obj.accumulate("Message", e.getLocalizedMessage());
+   
+        }
+        System.out.println("Goodbye!");
+ 
+        return obj.toString();
+    }
+    @Path("viewtutorial&{name}")
+    @GET
+    @Produces("application/json")
+    public String viewtutorial (@PathParam("name") String tut_name) throws SQLException, IOException {
+        try {
+            create_connection.getConnection();
+            
+            String sql = "select TUTORIALS.DESCRIPTION,CATEGORIES.CAT_NAME,TUTORIALS.ADDED_DATE,TUTORIALS.TUT_ID,TUTORIALS.USER_ID,TUTORIAL_CATEGORY.CAT_ID from TUTORIALS left join TUTORIAL_CATEGORY on TUTORIAL_CATEGORY.TUT_ID=TUTORIALS.TUT_ID left join CATEGORIES on CATEGORIES.CAT_ID =TUTORIAL_CATEGORY.CAT_ID where TUTORIALS.DESCRIPTION='"+tut_name+"'";
+            ResultSet rs = create_connection.grewal(sql);
+            if (rs.next()) {
+                status = "ok";
+                obj.accumulate("Status", status);
+                Long timenow = curenttime();
+                obj.accumulate("Timestmap", timenow);
+                
+                    String CAT_NAME = rs.getString("CAT_NAME");
+                  String ADDED_DATE = rs.getString("ADDED_DATE");
+                  String TutorialId = rs.getString("TUT_ID");
+                  String UserId = rs.getString("USER_ID");
+                  String CategoryId = rs.getString("CAT_ID");
+                  
+                    
+                    obj.accumulate("TutorialName", tut_name);
+                    obj.accumulate("AddedDate", ADDED_DATE);
+                    obj.accumulate("TutorialId", TutorialId);
+                    obj.accumulate("UserId", UserId);
+                    obj.accumulate("CategoryName", CAT_NAME);
+                    obj.accumulate("CategoryId", CategoryId);
+                
+            } else {
+                status = "wrong";
+
+                obj.accumulate("Status", status);
+                Long timenow = curenttime();
+                obj.accumulate("Timestmap", timenow);
+                obj.accumulate("TutorialName", tut_name);
+                   
+                obj.accumulate("Message", "no column or row found");
+             
+            }
+          
+        } catch (Exception e) {
+            obj.accumulate("Status", "ERROR");
+            obj.accumulate("TimeStamp", curenttime());
+            obj.accumulate("TutorialName", tut_name);
+            
+            obj.accumulate("Message", e.getLocalizedMessage());
+   
+        }
+        System.out.println("Goodbye!");
+ 
+        return obj.toString();
+    }
+     @Path("viewalltutorial")
+    @GET
+    @Produces("application/json")
+    public String viewalltutorial () throws SQLException, IOException {
+        try {
+            create_connection.getConnection();
+            
+            String sql = "select TUTORIALS.DESCRIPTION,CATEGORIES.CAT_NAME,TUTORIALS.ADDED_DATE,TUTORIALS.TUT_ID,TUTORIALS.USER_ID,TUTORIAL_CATEGORY.CAT_ID from TUTORIALS left join TUTORIAL_CATEGORY on TUTORIAL_CATEGORY.TUT_ID=TUTORIALS.TUT_ID left join CATEGORIES on CATEGORIES.CAT_ID =TUTORIAL_CATEGORY.CAT_ID";
+            ResultSet rs = create_connection.grewal(sql);
+            if (rs.next()) {
+                status = "ok";
+                obj.accumulate("Status", status);
+                Long timenow = curenttime();
+                obj.accumulate("Timestmap", timenow);
+                rs.beforeFirst();
+                JSONArray ary = new JSONArray();
+                
+                while (rs.next()) {
+                    String CAT_NAME = rs.getString("CAT_NAME");
+                  String ADDED_DATE = rs.getString("ADDED_DATE");
+                  String TutorialId = rs.getString("TUT_ID");
+                  String UserId = rs.getString("USER_ID");
+                  String CategoryId = rs.getString("CAT_ID");
+                  String DESCRIPTION = rs.getString("DESCRIPTION");
+                  JSONObject newobj=new JSONObject();
+                    
+                    newobj.accumulate("TutorialName", DESCRIPTION);
+                    newobj.accumulate("AddedDate", ADDED_DATE);
+                    newobj.accumulate("TutorialId", TutorialId);
+                    newobj.accumulate("UserId", UserId);
+                    newobj.accumulate("CategoryName", CAT_NAME);
+                    newobj.accumulate("CategoryId", CategoryId);
+                             ary.add(newobj);
+                            newobj.clear();
+                } 
+                obj.accumulate("Tutorials", ary);
+                
+            } else {
+                status = "wrong";
+
+                obj.accumulate("Status", status);
+                Long timenow = curenttime();
+                obj.accumulate("Timestmap", timenow);
+               
+                   
+                obj.accumulate("Message", "no column or row found");
+             
+            }
+          
+        } catch (Exception e) {
+            obj.accumulate("Status", "ERROR");
+            obj.accumulate("TimeStamp", curenttime());
+           
+            
+            obj.accumulate("Message", e.getLocalizedMessage());
+   
+        }
+        System.out.println("Goodbye!");
+ 
+        return obj.toString();
+    }
+     @Path("viewcategory&{name}")
+    @GET
+    @Produces("application/json")
+    public String viewcategory (@PathParam("name") String cat_name) throws SQLException, IOException {
+        try {
+            create_connection.getConnection();
+            
+            String sql = "select TUTORIALS.DESCRIPTION,CATEGORIES.CAT_NAME,TUTORIALS.ADDED_DATE,TUTORIALS.TUT_ID,TUTORIALS.USER_ID,TUTORIAL_CATEGORY.CAT_ID from TUTORIALS right join TUTORIAL_CATEGORY on TUTORIAL_CATEGORY.TUT_ID=TUTORIALS.TUT_ID right join CATEGORIES on CATEGORIES.CAT_ID =TUTORIAL_CATEGORY.CAT_ID where CATEGORIES.CAT_NAME='"+cat_name+"'";
+            ResultSet rs = create_connection.grewal(sql);
+            if (rs.next()) {
+                status = "ok";
+                obj.accumulate("Status", status);
+                Long timenow = curenttime();
+                obj.accumulate("Timestmap", timenow);
+                 String CategoryId = rs.getString("CAT_ID");
+                  obj.accumulate("CategoryName", cat_name);
+                    obj.accumulate("CategoryId", CategoryId);
+                    rs.beforeFirst();
+                    JSONArray ary=new JSONArray();
+                    while(rs.next()){
+                    String DESCRIPTION = rs.getString("DESCRIPTION");
+                  String ADDED_DATE = rs.getString("ADDED_DATE");
+                  String TutorialId = rs.getString("TUT_ID");
+                  String UserId = rs.getString("USER_ID");
+                 
+                  JSONObject newobj=new JSONObject();
+                  
+                    
+                    newobj.accumulate("TutorialName", DESCRIPTION);
+                    newobj.accumulate("AddedDate", ADDED_DATE);
+                    newobj.accumulate("TutorialId", TutorialId);
+                    newobj.accumulate("UserId", UserId);
+                    ary.add(newobj);
+                    newobj.clear();
+                   
+            }  
+                    obj.accumulate("tutorials", ary);
+            } else {
+                status = "wrong";
+
+                obj.accumulate("Status", status);
+                Long timenow = curenttime();
+                obj.accumulate("Timestmap", timenow);
+                obj.accumulate("TutorialName", cat_name);
+                   
+                obj.accumulate("Message", "no column or row found");
+             
+            }
+          
+        } catch (Exception e) {
+            obj.accumulate("Status", "ERROR");
+            obj.accumulate("TimeStamp", curenttime());
+            obj.accumulate("TutorialName", cat_name);
+            
+            obj.accumulate("Message", e.getLocalizedMessage());
+   
+        }
+        System.out.println("Goodbye!");
+ 
+        return obj.toString();
+    }
+     @Path("viewallcategory")
+    @GET
+    @Produces("application/json")
+    public String viewallcategory () throws SQLException, IOException {
+        try {
+            create_connection.getConnection();
+            
+            String sql = "select TUTORIALS.DESCRIPTION,CATEGORIES.CAT_NAME,TUTORIALS.ADDED_DATE,TUTORIALS.TUT_ID,TUTORIALS.USER_ID,TUTORIAL_CATEGORY.CAT_ID from TUTORIALS right join TUTORIAL_CATEGORY on TUTORIAL_CATEGORY.TUT_ID=TUTORIALS.TUT_ID right join CATEGORIES on CATEGORIES.CAT_ID =TUTORIAL_CATEGORY.CAT_ID";
+            ResultSet rs = create_connection.grewal(sql);
+            if (rs.next()) {
+                status = "ok";
+                obj.accumulate("Status", status);
+                Long timenow = curenttime();
+                obj.accumulate("Timestmap", timenow);
+                
+                    rs.beforeFirst();
+                    JSONArray ary=new JSONArray();
+                    while(rs.next()){
+                        String CategoryId = rs.getString("CAT_ID");
+                    String DESCRIPTION = rs.getString("DESCRIPTION");
+                  String ADDED_DATE = rs.getString("ADDED_DATE");
+                  String TutorialId = rs.getString("TUT_ID");
+                  String UserId = rs.getString("USER_ID");
+                   String cat_name = rs.getString("CAT_NAME");
+                  JSONObject newobj=new JSONObject();
+                  
+                    newobj.accumulate("CategoryName", cat_name);
+                    newobj.accumulate("CategoryId", CategoryId);
+                    newobj.accumulate("TutorialName", DESCRIPTION);
+                    newobj.accumulate("AddedDate", ADDED_DATE);
+                    newobj.accumulate("TutorialId", TutorialId);
+                    newobj.accumulate("UserId", UserId);
+                    
+                    ary.add(newobj);
+                    newobj.clear();
+                   
+            }  
+                    obj.accumulate("Categories", ary); 
+            } else {
+                status = "wrong";
+
+                obj.accumulate("Status", status);
+                Long timenow = curenttime();
+                obj.accumulate("Timestmap", timenow);
+               
+                   
+                obj.accumulate("Message", "no column or row found");
+             
+            }
+          
+        } catch (Exception e) {
+            obj.accumulate("Status", "ERROR");
+            obj.accumulate("TimeStamp", curenttime());
+           
+            
             obj.accumulate("Message", e.getLocalizedMessage());
    
         }
