@@ -64,7 +64,7 @@ public class grewal {
     public String signup(@PathParam("Uname") String name, @PathParam("Ulastn") String lastn, @PathParam("Uid") String id, @PathParam("Uemail") String useremail, @PathParam("Unumber") String number, @PathParam("Upass") String pass, @PathParam("datebirth") String birthdate) throws SQLException, IOException {
         try {
             create_connection.getConnection();
-            String sql1 = "INSERT INTO PROJ3.USERINFO (FIRSTNAME, LASTNAME, USER_ID, EMAIL, PHONENUMBER, PASSWORD,dob) VALUES ('" + name + "', '" + lastn + "', '" + id + "', '" + useremail + "', '" + number + "', '" + pass + "', '" + birthdate + "')";
+            String sql1 = "INSERT INTO PROJ3.USERINFO (FIRSTNAME, LASTNAME, USER_ID, EMAIL, PHONENUMBER, PASSWORD,dob) VALUES ('" + name + "', '" + lastn + "', '" + id + "', '" + useremail + "', '" + number + "', '" + pass + "',TO_DATE('" + birthdate + "','dd-MM-yyyy'))";
             ResultSet rs1 = create_connection.grewal(sql1);
             rs1.close();
             String sql = "select * from USERINFO";
