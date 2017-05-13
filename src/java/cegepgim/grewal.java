@@ -100,7 +100,7 @@ public class grewal {
             obj.accumulate("Status", "ERROR");
             obj.accumulate("TimeStamp", curenttime());
             obj.accumulate("UserId", id);
-            obj.accumulate("Message", "error occurred - " + e.getLocalizedMessage());
+            obj.accumulate("Message", "error occurred - " );
 
         }
         System.out.println("Goodbye!");
@@ -155,7 +155,7 @@ public class grewal {
             obj.accumulate("Status", "ERROR");
             obj.accumulate("TimeStamp", curenttime());
             obj.accumulate("UserId", id);
-            obj.accumulate("Message", "error occurred - " + e.getLocalizedMessage());
+            obj.accumulate("Message", "error occurred - " );
 
         }
         System.out.println("Goodbye!");
@@ -202,7 +202,7 @@ public class grewal {
             obj.accumulate("TimeStamp", curenttime());
             obj.accumulate("UserId", id);
             obj.accumulate("Email", useremail);
-            obj.accumulate("Message", "error occurred - " + e.getLocalizedMessage());
+            obj.accumulate("Message", "error occurred - ");
 
         }
         System.out.println("Goodbye!");
@@ -249,7 +249,7 @@ public class grewal {
             obj.accumulate("TimeStamp", curenttime());
             obj.accumulate("UserId", id);
             obj.accumulate("PhoneNumber", number);
-            obj.accumulate("Message", "error occurred - " + e.getLocalizedMessage());
+            obj.accumulate("Message", "error occurred - ");
 
         }
         System.out.println("Goodbye!");
@@ -304,7 +304,7 @@ public class grewal {
             obj.accumulate("TimeStamp", curenttime());
             obj.accumulate("TutorialId", Tut_id);
             obj.accumulate("UserID", Userid);
-            obj.accumulate("Message", "error occurred - " + e.getLocalizedMessage());
+            obj.accumulate("Message", "error occurred - " );
 
         }
         System.out.println("Goodbye!");
@@ -356,7 +356,7 @@ public class grewal {
             obj.accumulate("TimeStamp", curenttime());
             obj.accumulate("TutorialId", Tut_id);
             obj.accumulate("UserID", Userid);
-            obj.accumulate("Message", "error occurred - " + e.getLocalizedMessage());
+            obj.accumulate("Message", "error occurred - " );
 
         }
         System.out.println("Goodbye!");
@@ -423,7 +423,7 @@ public class grewal {
             obj.accumulate("TimeStamp", curenttime());
 
             obj.accumulate("UserID", userid);
-            obj.accumulate("Message", "error occurred - " + e.getLocalizedMessage());
+            obj.accumulate("Message", "error occurred - " );
         }
         System.out.println("Goodbye!");
         return obj.toString();
@@ -472,7 +472,7 @@ public class grewal {
             obj.accumulate("TimeStamp", curenttime());
             obj.accumulate("TutorialName", tut_name);
 
-            obj.accumulate("Message", "error occurred - " + e.getLocalizedMessage());
+            obj.accumulate("Message", "error occurred - " );
 
         }
         System.out.println("Goodbye!");
@@ -529,7 +529,7 @@ public class grewal {
         } catch (Exception e) {
             obj.accumulate("Status", "ERROR");
             obj.accumulate("TimeStamp", curenttime());
-            obj.accumulate("Message", "error occurred - " + e.getLocalizedMessage());
+            obj.accumulate("Message", "error occurred - " );
         }
         System.out.println("Goodbye!");
         return obj.toString();
