@@ -96,11 +96,11 @@ public class grewal {
             s.closeConnection();
             s.closeStmt();
 
-        } catch (Exception e) {
+        } catch (SQLException|ClassNotFoundException e) {
             obj.accumulate("Status", "ERROR");
             obj.accumulate("TimeStamp", curenttime());
             obj.accumulate("UserId", id);
-            obj.accumulate("Message", "error occurred - " );
+            obj.accumulate("Message", "error occurred :-" +e.getLocalizedMessage());
 
         }
         System.out.println("Goodbye!");
@@ -151,11 +151,12 @@ public class grewal {
             s.closeConnection();
             s.closeStmt();
 
-        } catch (Exception e) {
+        }catch (SQLException|ClassNotFoundException e) {
             obj.accumulate("Status", "ERROR");
             obj.accumulate("TimeStamp", curenttime());
             obj.accumulate("UserId", id);
-            obj.accumulate("Message", "error occurred - " );
+           obj.accumulate("Message", "error occurred :-" +e.getLocalizedMessage());
+
 
         }
         System.out.println("Goodbye!");
@@ -197,12 +198,13 @@ public class grewal {
             s.closeConnection();
             s.closeStmt();
 
-        } catch (Exception e) {
+        }catch (SQLException|ClassNotFoundException e) {
             obj.accumulate("Status", "ERROR");
             obj.accumulate("TimeStamp", curenttime());
             obj.accumulate("UserId", id);
             obj.accumulate("Email", useremail);
-            obj.accumulate("Message", "error occurred - ");
+              obj.accumulate("Message", "error occurred :-" +e.getLocalizedMessage());
+
 
         }
         System.out.println("Goodbye!");
@@ -244,12 +246,13 @@ public class grewal {
             s.closeConnection();
             s.closeStmt();
 
-        } catch (Exception e) {
+        } catch (SQLException|ClassNotFoundException e) {
             obj.accumulate("Status", "ERROR");
             obj.accumulate("TimeStamp", curenttime());
             obj.accumulate("UserId", id);
             obj.accumulate("PhoneNumber", number);
-            obj.accumulate("Message", "error occurred - ");
+            obj.accumulate("Message", "error occurred :-" +e.getLocalizedMessage());
+
 
         }
         System.out.println("Goodbye!");
@@ -299,12 +302,13 @@ public class grewal {
             s.closeConnection();
             s.closeStmt();
 
-        } catch (Exception e) {
+        } catch (SQLException|ClassNotFoundException e) {
             obj.accumulate("Status", "ERROR");
             obj.accumulate("TimeStamp", curenttime());
             obj.accumulate("TutorialId", Tut_id);
             obj.accumulate("UserID", Userid);
-            obj.accumulate("Message", "error occurred - " );
+            obj.accumulate("Message", "error occurred :-" +e.getLocalizedMessage());
+
 
         }
         System.out.println("Goodbye!");
@@ -351,12 +355,13 @@ public class grewal {
             s.closeConnection();
             s.closeStmt();
 
-        } catch (Exception e) {
+        } catch (SQLException|ClassNotFoundException e) {
             obj.accumulate("Status", "ERROR");
             obj.accumulate("TimeStamp", curenttime());
             obj.accumulate("TutorialId", Tut_id);
             obj.accumulate("UserID", Userid);
-            obj.accumulate("Message", "error occurred - " );
+            obj.accumulate("Message", "error occurred :-" +e.getLocalizedMessage());
+
 
         }
         System.out.println("Goodbye!");
@@ -418,12 +423,13 @@ public class grewal {
             s.closeConnection();
             s.closeStmt();
 
-        } catch (Exception e) {
+        } catch (SQLException|ClassNotFoundException e) {
             obj.accumulate("Status", "ERROR");
             obj.accumulate("TimeStamp", curenttime());
 
             obj.accumulate("UserID", userid);
-            obj.accumulate("Message", "error occurred - " );
+            obj.accumulate("Message", "error occurred :-" +e.getLocalizedMessage());
+
         }
         System.out.println("Goodbye!");
         return obj.toString();
@@ -467,12 +473,12 @@ public class grewal {
             rs.close();
             s.closeConnection();
             s.closeStmt();
-        } catch (Exception e) {
+        }catch (SQLException|ClassNotFoundException e) {
             obj.accumulate("Status", "ERROR");
             obj.accumulate("TimeStamp", curenttime());
             obj.accumulate("TutorialName", tut_name);
+   obj.accumulate("Message", "error occurred :-" +e.getLocalizedMessage());
 
-            obj.accumulate("Message", "error occurred - " );
 
         }
         System.out.println("Goodbye!");
@@ -526,10 +532,11 @@ public class grewal {
             rs.close();
             s.closeConnection();
             s.closeStmt();
-        } catch (Exception e) {
+        } catch (SQLException|ClassNotFoundException e) {
             obj.accumulate("Status", "ERROR");
             obj.accumulate("TimeStamp", curenttime());
-            obj.accumulate("Message", "error occurred - " );
+              obj.accumulate("Message", "error occurred :-" +e.getLocalizedMessage());
+
         }
         System.out.println("Goodbye!");
         return obj.toString();
@@ -580,11 +587,12 @@ public class grewal {
             rs.close();
             s.closeConnection();
             s.closeStmt();
-        } catch (Exception e) {
+        } catch (SQLException|ClassNotFoundException e) {
             obj.accumulate("Status", "ERROR");
             obj.accumulate("TimeStamp", curenttime());
             obj.accumulate("TutorialName", cat_name);
-            obj.accumulate("Message", "error occurred - " + e.getLocalizedMessage());
+            obj.accumulate("Message", "error occurred :-" +e.getLocalizedMessage());
+
         }
         System.out.println("Goodbye!");
         return obj.toString();
@@ -634,10 +642,11 @@ public class grewal {
             rs.close();
             s.closeConnection();
             s.closeStmt();
-        } catch (Exception e) {
+        } catch (SQLException|ClassNotFoundException e) {
             obj.accumulate("Status", "ERROR");
             obj.accumulate("TimeStamp", curenttime());
-            obj.accumulate("Message", "error occurred - " + e.getLocalizedMessage());
+               obj.accumulate("Message", "error occurred :-" +e.getLocalizedMessage());
+
         }
         System.out.println("Goodbye!");
         return obj.toString();
