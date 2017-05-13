@@ -23,22 +23,21 @@ public class create_connection {
      final String username = "Proj3";
      final String password = "ject3pw";
 private  Connection con;
-  public  Connection getConnection() {
+  public  Connection getConnection() throws ClassNotFoundException, SQLException {
       System.out.println("Connecting to database...");
         System.out.println("Creating statement...");
          
-        try {
+       
             Class.forName(driverName);
-            try {
+          
                 con = DriverManager.getConnection(url, username, password);
-            } catch (SQLException ex) {
+          
                
              System.out.println("connection problem"); 
-            }
-        } catch (ClassNotFoundException ex) {
+        
             
             System.out.println("Driver not found."); 
-        }
+       
         return con;
     }
    public  void closeConnection() throws SQLException {
