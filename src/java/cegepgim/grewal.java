@@ -144,7 +144,7 @@ public class grewal {
                 Long timenow = curenttime();
                 obj.accumulate("Timestmap", timenow);
                 obj.accumulate("UserId", id);
-                obj.accumulate("Message", "no column or row found");
+                obj.accumulate("Message", "login failed:-wrong username or password ");
 
             }
             rs.close();
@@ -271,6 +271,7 @@ public class grewal {
             String sql1 = "INSERT INTO PROJ3.COMPLAINTS (DESCRIPTIONS, TUT_ID, USER_ID,COM_DATE) VALUES ('" + Cdescription + "', '" + Tut_id + "', '" + Userid + "',TO_TIMESTAMP('" + current_time + "','yyyy-MM-dd hh24:mi:ss'))";
             ResultSet rs1 = s.grewal(sql1);
             rs1.close();
+            s.closeStmt();
             String sql = "select * from COMPLAINTS where DESCRIPTIONS='" + Cdescription + "'";
             ResultSet rs = s.grewal(sql);
             if (rs.next()) {
@@ -327,6 +328,7 @@ public class grewal {
             String sql1 = "INSERT INTO PROJ3.SUGGESTIONS (REVIEWS, TUT_ID, USER_ID,SUG_DATE) VALUES ('" + suggestion + "', '" + Tut_id + "', '" + Userid + "',TO_TIMESTAMP('" + current_time + "','yyyy-MM-dd hh24:mi:ss'))";
             ResultSet rs1 = s.grewal(sql1);
             rs1.close();
+            s.closeStmt();
             String sql = "select * from SUGGESTIONS where REVIEWS='" + suggestion + "'";
             ResultSet rs = s.grewal(sql);
             if (rs.next()) {
@@ -380,6 +382,7 @@ public class grewal {
             String sql1 = "INSERT INTO PROJ3.TUTORIALS (DESCRIPTION, USER_ID,TUT_ID, ADDED_DATE) VALUES ('" + DESCRIPTION + "', '" + userid + "', seq_tutid.nextval,TO_TIMESTAMP('" + current_time + "','yyyy-MM-dd hh24:mi:ss'))";
             ResultSet rs1 = s.grewal(sql1);
             rs1.close();
+            s.closeStmt();
 
             String sql3 = "select * from TUTORIALS where DESCRIPTION='" + DESCRIPTION + "'";
 
@@ -387,12 +390,15 @@ public class grewal {
 
             if (rs3.next()) {
                 String tut_id = rs3.getString("tut_id");
-
+                s.closeStmt();
                 String sql2 = "INSERT INTO PROJ3.TUTORIAL_CATEGORY (TUT_ID, CAT_ID) VALUES ('" + tut_id + "', '" + tut_cat + "')";
                 ResultSet rs2 = s.grewal(sql2);
                 rs2.close();
+                
             }
+            s.closeStmt();
             rs3.close();
+            
             String sql = "select TUTORIALS.DESCRIPTION,CATEGORIES.CAT_NAME,TUTORIALS.ADDED_DATE,TUTORIALS.TUT_ID,TUTORIALS.USER_ID,TUTORIAL_CATEGORY.CAT_ID from TUTORIALS left join TUTORIAL_CATEGORY on TUTORIAL_CATEGORY.TUT_ID=TUTORIALS.TUT_ID left join CATEGORIES on CATEGORIES.CAT_ID =TUTORIAL_CATEGORY.CAT_ID where TUTORIALS.DESCRIPTION='" + DESCRIPTION + "'";
             ResultSet rs = s.grewal(sql);
             if (rs.next()) {
