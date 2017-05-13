@@ -39,7 +39,6 @@ public class grewal {
      */
     public static String status = null;
     JSONObject obj = new JSONObject();
-   
 
     public grewal() {
     }
@@ -63,7 +62,7 @@ public class grewal {
     @Produces("application/json")
     public String signup(@PathParam("Uname") String name, @PathParam("Ulastn") String lastn, @PathParam("Uid") String id, @PathParam("Uemail") String useremail, @PathParam("Unumber") String number, @PathParam("Upass") String pass, @PathParam("datebirth") String birthdate) throws SQLException, IOException {
         try {
-            create_connection s=new create_connection();
+            create_connection s = new create_connection();
             s.getConnection();
             String sql1 = "INSERT INTO PROJ3.USERINFO (FIRSTNAME, LASTNAME, USER_ID, EMAIL, PHONENUMBER, PASSWORD,dob) VALUES ('" + name + "', '" + lastn + "', '" + id + "', '" + useremail + "', '" + number + "', '" + pass + "',TO_DATE('" + birthdate + "','dd-MM-yyyy'))";
             ResultSet rs1 = s.grewal(sql1);
@@ -92,15 +91,16 @@ public class grewal {
                 obj.accumulate("UserId", id);
                 obj.accumulate("Message", "no column or row found");
 
-            }rs.close();
-                s.closeConnection();
-                s.closeStmt();
+            }
+            rs.close();
+            s.closeConnection();
+            s.closeStmt();
 
         } catch (Exception e) {
             obj.accumulate("Status", "ERROR");
             obj.accumulate("TimeStamp", curenttime());
             obj.accumulate("UserId", id);
-            obj.accumulate("Message", e.getLocalizedMessage());
+            obj.accumulate("Message", "error occurred - " + e.getLocalizedMessage());
 
         }
         System.out.println("Goodbye!");
@@ -113,7 +113,7 @@ public class grewal {
     @Produces("application/json")
     public String login(@PathParam("Uid") String id, @PathParam("Upass") String pass) throws SQLException, IOException {
         try {
-           create_connection s=new create_connection();
+            create_connection s = new create_connection();
             s.getConnection();
 
             String sql = "select * from USERINFO where user_id='" + id + "' and password='" + pass + "'";
@@ -148,14 +148,14 @@ public class grewal {
 
             }
             rs.close();
-                s.closeConnection();
-                s.closeStmt();
+            s.closeConnection();
+            s.closeStmt();
 
         } catch (Exception e) {
             obj.accumulate("Status", "ERROR");
             obj.accumulate("TimeStamp", curenttime());
             obj.accumulate("UserId", id);
-            obj.accumulate("Message", e.getLocalizedMessage());
+            obj.accumulate("Message", "error occurred - " + e.getLocalizedMessage());
 
         }
         System.out.println("Goodbye!");
@@ -168,7 +168,7 @@ public class grewal {
     @Produces("application/json")
     public String forgotpasswordemail(@PathParam("Uid") String id, @PathParam("Uemail") String useremail) throws SQLException, IOException {
         try {
-           create_connection s=new create_connection();
+            create_connection s = new create_connection();
             s.getConnection();
 
             String sql = "select * from USERINFO where user_id='" + id + "' and email='" + useremail + "'";
@@ -194,15 +194,15 @@ public class grewal {
 
             }
             rs.close();
-                s.closeConnection();
-                s.closeStmt();
+            s.closeConnection();
+            s.closeStmt();
 
         } catch (Exception e) {
             obj.accumulate("Status", "ERROR");
             obj.accumulate("TimeStamp", curenttime());
             obj.accumulate("UserId", id);
             obj.accumulate("Email", useremail);
-            obj.accumulate("Message", e.getLocalizedMessage());
+            obj.accumulate("Message", "error occurred - " + e.getLocalizedMessage());
 
         }
         System.out.println("Goodbye!");
@@ -215,7 +215,7 @@ public class grewal {
     @Produces("application/json")
     public String forgotpasswordphone(@PathParam("Uid") String id, @PathParam("phonenumber") String number) throws SQLException, IOException {
         try {
-           create_connection s=new create_connection();
+            create_connection s = new create_connection();
             s.getConnection();
 
             String sql = "select * from USERINFO where user_id='" + id + "' and PHONENUMBER='" + number + "'";
@@ -241,15 +241,15 @@ public class grewal {
 
             }
             rs.close();
-                s.closeConnection();
-                s.closeStmt();
+            s.closeConnection();
+            s.closeStmt();
 
         } catch (Exception e) {
             obj.accumulate("Status", "ERROR");
             obj.accumulate("TimeStamp", curenttime());
             obj.accumulate("UserId", id);
             obj.accumulate("PhoneNumber", number);
-            obj.accumulate("Message", e.getLocalizedMessage());
+            obj.accumulate("Message", "error occurred - " + e.getLocalizedMessage());
 
         }
         System.out.println("Goodbye!");
@@ -262,7 +262,7 @@ public class grewal {
     @Produces("application/json")
     public String addcomplaints(@PathParam("description") String Cdescription, @PathParam("Tutid") String Tut_id, @PathParam("Uid") String Userid) throws SQLException, IOException {
         try {
-           create_connection s=new create_connection();
+            create_connection s = new create_connection();
             s.getConnection();
             String current_time = timenow();
             String sql1 = "INSERT INTO PROJ3.COMPLAINTS (DESCRIPTIONS, TUT_ID, USER_ID,COM_DATE) VALUES ('" + Cdescription + "', '" + Tut_id + "', '" + Userid + "',TO_TIMESTAMP('" + current_time + "','yyyy-MM-dd hh24:mi:ss'))";
@@ -296,15 +296,15 @@ public class grewal {
 
             }
             rs.close();
-                s.closeConnection();
-                s.closeStmt();
+            s.closeConnection();
+            s.closeStmt();
 
         } catch (Exception e) {
             obj.accumulate("Status", "ERROR");
             obj.accumulate("TimeStamp", curenttime());
             obj.accumulate("TutorialId", Tut_id);
             obj.accumulate("UserID", Userid);
-            obj.accumulate("Message", e.getLocalizedMessage());
+            obj.accumulate("Message", "error occurred - " + e.getLocalizedMessage());
 
         }
         System.out.println("Goodbye!");
@@ -317,7 +317,7 @@ public class grewal {
     @Produces("application/json")
     public String addsuggestions(@PathParam("SUGGESTIONS") String suggestion, @PathParam("Tutid") String Tut_id, @PathParam("Uid") String Userid) throws SQLException, IOException {
         try {
-           create_connection s=new create_connection();
+            create_connection s = new create_connection();
             s.getConnection();
             String current_time = timenow();
             String sql1 = "INSERT INTO PROJ3.SUGGESTIONS (REVIEWS, TUT_ID, USER_ID,SUG_DATE) VALUES ('" + suggestion + "', '" + Tut_id + "', '" + Userid + "',TO_TIMESTAMP('" + current_time + "','yyyy-MM-dd hh24:mi:ss'))";
@@ -348,15 +348,15 @@ public class grewal {
                 obj.accumulate("Message", "no column or row found");
             }
             rs.close();
-                s.closeConnection();
-                s.closeStmt();
+            s.closeConnection();
+            s.closeStmt();
 
         } catch (Exception e) {
             obj.accumulate("Status", "ERROR");
             obj.accumulate("TimeStamp", curenttime());
             obj.accumulate("TutorialId", Tut_id);
             obj.accumulate("UserID", Userid);
-            obj.accumulate("Message", e.getLocalizedMessage());
+            obj.accumulate("Message", "error occurred - " + e.getLocalizedMessage());
 
         }
         System.out.println("Goodbye!");
@@ -369,24 +369,23 @@ public class grewal {
     @Produces("application/json")
     public String addtutorials(@PathParam("DESCRIPTION") String DESCRIPTION, @PathParam("userid") String userid, @PathParam("tut_category") String tut_cat) throws SQLException, IOException {
         try {
-           create_connection s=new create_connection();
+            create_connection s = new create_connection();
             s.getConnection();
             String current_time = timenow();
             String sql1 = "INSERT INTO PROJ3.TUTORIALS (DESCRIPTION, USER_ID,TUT_ID, ADDED_DATE) VALUES ('" + DESCRIPTION + "', '" + userid + "', seq_tutid.nextval,TO_TIMESTAMP('" + current_time + "','yyyy-MM-dd hh24:mi:ss'))";
             ResultSet rs1 = s.grewal(sql1);
-             rs1.close();
-             
-             String sql3 ="select * from TUTORIALS where DESCRIPTION='"+DESCRIPTION+"'";
-            
+            rs1.close();
+
+            String sql3 = "select * from TUTORIALS where DESCRIPTION='" + DESCRIPTION + "'";
+
             ResultSet rs3 = s.grewal(sql3);
-           
-            if(rs3.next()){
-             String tut_id=rs3.getString("tut_id");
-           
-           
-            String sql2 = "INSERT INTO PROJ3.TUTORIAL_CATEGORY (TUT_ID, CAT_ID) VALUES ('"+tut_id+"', '" + tut_cat + "')";
-            ResultSet rs2 = s.grewal(sql2);
-            rs2.close();
+
+            if (rs3.next()) {
+                String tut_id = rs3.getString("tut_id");
+
+                String sql2 = "INSERT INTO PROJ3.TUTORIAL_CATEGORY (TUT_ID, CAT_ID) VALUES ('" + tut_id + "', '" + tut_cat + "')";
+                ResultSet rs2 = s.grewal(sql2);
+                rs2.close();
             }
             rs3.close();
             String sql = "select TUTORIALS.DESCRIPTION,CATEGORIES.CAT_NAME,TUTORIALS.ADDED_DATE,TUTORIALS.TUT_ID,TUTORIALS.USER_ID,TUTORIAL_CATEGORY.CAT_ID from TUTORIALS left join TUTORIAL_CATEGORY on TUTORIAL_CATEGORY.TUT_ID=TUTORIALS.TUT_ID left join CATEGORIES on CATEGORIES.CAT_ID =TUTORIAL_CATEGORY.CAT_ID where TUTORIALS.DESCRIPTION='" + DESCRIPTION + "'";
@@ -397,7 +396,7 @@ public class grewal {
                 Long timenow = curenttime();
                 obj.accumulate("Timestmap", timenow);
                 String CAT_NAME = rs.getString("CAT_NAME");
-              String tut_id1 = rs.getString("TUT_ID");
+                String tut_id1 = rs.getString("TUT_ID");
                 obj.accumulate("TutorialName", DESCRIPTION);
                 obj.accumulate("AddedDate", timenow());
                 obj.accumulate("TutorialId", tut_id1);
@@ -405,27 +404,26 @@ public class grewal {
                 obj.accumulate("CategoryName", CAT_NAME);
                 obj.accumulate("CategoryId", tut_cat);
 
-            } 
-            else {
+            } else {
                 status = "wrong";
                 obj.accumulate("Status", status);
                 Long timenow = curenttime();
                 obj.accumulate("Timestmap", timenow);
-                
+
                 obj.accumulate("UserID", userid);
                 obj.accumulate("Message", "no column or row found");
 
             }
             rs.close();
-                s.closeConnection();
-                s.closeStmt();
+            s.closeConnection();
+            s.closeStmt();
 
         } catch (Exception e) {
             obj.accumulate("Status", "ERROR");
             obj.accumulate("TimeStamp", curenttime());
-     
+
             obj.accumulate("UserID", userid);
-            obj.accumulate("Message", e.getLocalizedMessage());
+            obj.accumulate("Message", "error occurred - " + e.getLocalizedMessage());
         }
         System.out.println("Goodbye!");
         return obj.toString();
@@ -436,7 +434,7 @@ public class grewal {
     @Produces("application/json")
     public String viewtutorial(@PathParam("name") String tut_name) throws SQLException, IOException {
         try {
-           create_connection s=new create_connection();
+            create_connection s = new create_connection();
             s.getConnection();
 
             String sql = "select TUTORIALS.DESCRIPTION,CATEGORIES.CAT_NAME,TUTORIALS.ADDED_DATE,TUTORIALS.TUT_ID,TUTORIALS.USER_ID,TUTORIAL_CATEGORY.CAT_ID from TUTORIALS left join TUTORIAL_CATEGORY on TUTORIAL_CATEGORY.TUT_ID=TUTORIALS.TUT_ID left join CATEGORIES on CATEGORIES.CAT_ID =TUTORIAL_CATEGORY.CAT_ID where TUTORIALS.DESCRIPTION='" + tut_name + "'";
@@ -466,15 +464,15 @@ public class grewal {
                 obj.accumulate("TutorialName", tut_name);
                 obj.accumulate("Message", "no column or row found");
             }
-rs.close();
-                s.closeConnection();
-                s.closeStmt();
+            rs.close();
+            s.closeConnection();
+            s.closeStmt();
         } catch (Exception e) {
             obj.accumulate("Status", "ERROR");
             obj.accumulate("TimeStamp", curenttime());
             obj.accumulate("TutorialName", tut_name);
 
-            obj.accumulate("Message", e.getLocalizedMessage());
+            obj.accumulate("Message", "error occurred - " + e.getLocalizedMessage());
 
         }
         System.out.println("Goodbye!");
@@ -487,7 +485,7 @@ rs.close();
     @Produces("application/json")
     public String viewalltutorial() throws SQLException, IOException {
         try {
-           create_connection s=new create_connection();
+            create_connection s = new create_connection();
             s.getConnection();
 
             String sql = "select TUTORIALS.DESCRIPTION,CATEGORIES.CAT_NAME,TUTORIALS.ADDED_DATE,TUTORIALS.TUT_ID,TUTORIALS.USER_ID,TUTORIAL_CATEGORY.CAT_ID from TUTORIALS left join TUTORIAL_CATEGORY on TUTORIAL_CATEGORY.TUT_ID=TUTORIALS.TUT_ID left join CATEGORIES on CATEGORIES.CAT_ID =TUTORIAL_CATEGORY.CAT_ID";
@@ -525,13 +523,13 @@ rs.close();
                 obj.accumulate("Timestmap", timenow);
                 obj.accumulate("Message", "no column or row found");
             }
-rs.close();
-                s.closeConnection();
-                s.closeStmt();
+            rs.close();
+            s.closeConnection();
+            s.closeStmt();
         } catch (Exception e) {
             obj.accumulate("Status", "ERROR");
             obj.accumulate("TimeStamp", curenttime());
-            obj.accumulate("Message", e.getLocalizedMessage());
+            obj.accumulate("Message", "error occurred - " + e.getLocalizedMessage());
         }
         System.out.println("Goodbye!");
         return obj.toString();
@@ -542,7 +540,7 @@ rs.close();
     @Produces("application/json")
     public String viewcategory(@PathParam("name") String cat_name) throws SQLException, IOException {
         try {
-           create_connection s=new create_connection();
+            create_connection s = new create_connection();
             s.getConnection();
 
             String sql = "select TUTORIALS.DESCRIPTION,CATEGORIES.CAT_NAME,TUTORIALS.ADDED_DATE,TUTORIALS.TUT_ID,TUTORIALS.USER_ID,TUTORIAL_CATEGORY.CAT_ID from TUTORIALS right join TUTORIAL_CATEGORY on TUTORIAL_CATEGORY.TUT_ID=TUTORIALS.TUT_ID right join CATEGORIES on CATEGORIES.CAT_ID =TUTORIAL_CATEGORY.CAT_ID where CATEGORIES.CAT_NAME='" + cat_name + "'";
@@ -579,14 +577,14 @@ rs.close();
                 obj.accumulate("TutorialName", cat_name);
                 obj.accumulate("Message", "no column or row found");
             }
-rs.close();
-                s.closeConnection();
-                s.closeStmt();
+            rs.close();
+            s.closeConnection();
+            s.closeStmt();
         } catch (Exception e) {
             obj.accumulate("Status", "ERROR");
             obj.accumulate("TimeStamp", curenttime());
             obj.accumulate("TutorialName", cat_name);
-            obj.accumulate("Message", e.getLocalizedMessage());
+            obj.accumulate("Message", "error occurred - " + e.getLocalizedMessage());
         }
         System.out.println("Goodbye!");
         return obj.toString();
@@ -597,7 +595,7 @@ rs.close();
     @Produces("application/json")
     public String viewallcategory() throws SQLException, IOException {
         try {
-           create_connection s=new create_connection();
+            create_connection s = new create_connection();
             s.getConnection();
             String sql = "select TUTORIALS.DESCRIPTION,CATEGORIES.CAT_NAME,TUTORIALS.ADDED_DATE,TUTORIALS.TUT_ID,TUTORIALS.USER_ID,TUTORIAL_CATEGORY.CAT_ID from TUTORIALS right join TUTORIAL_CATEGORY on TUTORIAL_CATEGORY.TUT_ID=TUTORIALS.TUT_ID right join CATEGORIES on CATEGORIES.CAT_ID =TUTORIAL_CATEGORY.CAT_ID";
             ResultSet rs = s.grewal(sql);
@@ -633,13 +631,13 @@ rs.close();
                 obj.accumulate("Timestmap", timenow);
                 obj.accumulate("Message", "no column or row found");
             }
-rs.close();
-                s.closeConnection();
-                s.closeStmt();
+            rs.close();
+            s.closeConnection();
+            s.closeStmt();
         } catch (Exception e) {
             obj.accumulate("Status", "ERROR");
             obj.accumulate("TimeStamp", curenttime());
-            obj.accumulate("Message", e.getLocalizedMessage());
+            obj.accumulate("Message", "error occurred - " + e.getLocalizedMessage());
         }
         System.out.println("Goodbye!");
         return obj.toString();

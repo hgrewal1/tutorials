@@ -17,7 +17,7 @@ public class create_connection {
   Statement stmt = null;
     //JDBC driver name and database URL
      final String driverName = "oracle.jdbc.OracleDriver";
-     final String url = "jdbc:oracle:thin:@144.217.163.57:1521:XE" ;
+     final String url = "jdbc:oracle:thin:@144yyy.217.163.57:1521:XE" ;
     
     // Database credentials
      final String username = "Proj3";
