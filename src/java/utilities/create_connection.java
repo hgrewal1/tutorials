@@ -12,18 +12,18 @@ import java.sql.*;
 
 
 public class create_connection {
-	
 
- static Statement stmt = null;
+
+  Statement stmt = null;
     //JDBC driver name and database URL
-    static final String driverName = "oracle.jdbc.OracleDriver";
-    static final String url = "jdbc:oracle:thin:@144.217.163.57:1521:XE" ;
+     final String driverName = "oracle.jdbc.OracleDriver";
+     final String url = "jdbc:oracle:thin:@144.217.163.57:1521:XE" ;
     
     // Database credentials
-    static final String username = "Proj3";
-    static final String password = "ject3pw";
-private static Connection con;
-  public static Connection getConnection() {
+     final String username = "Proj3";
+     final String password = "ject3pw";
+private  Connection con;
+  public  Connection getConnection() {
       System.out.println("Connecting to database...");
         System.out.println("Creating statement...");
          
@@ -33,7 +33,7 @@ private static Connection con;
                 con = DriverManager.getConnection(url, username, password);
             } catch (SQLException ex) {
                
-                System.out.println("Failed to create the database connection."); 
+             System.out.println("connection problem"); 
             }
         } catch (ClassNotFoundException ex) {
             
@@ -41,7 +41,14 @@ private static Connection con;
         }
         return con;
     }
-     public static ResultSet grewal(String S) throws SQLException {
+   public  void closeConnection() throws SQLException {
+      con.close();
+  }
+  
+  public  void closeStmt() throws SQLException {
+      stmt.close();
+  }
+     public  ResultSet grewal(String S) throws SQLException {
          
 stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 return stmt.executeQuery(S);
